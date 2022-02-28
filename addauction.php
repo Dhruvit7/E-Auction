@@ -17,8 +17,8 @@ if (isset($_POST['submit'])) {
     $tmp_name = $_FILES['item-image']['tmp_name'];
     $saveddate = date('mdy-Hms');
     $newfilename = 'uploads/item/' . $saveddate . '_' . $image_name;
-    
-            move_uploaded_file($tmp_name, $newfilename);
+
+    move_uploaded_file($tmp_name, $newfilename);
 
     $startdate = new DateTime();
     $enddate = $startdate;
@@ -51,13 +51,15 @@ if (isset($_POST['submit'])) {
         $itemSTMT->execute();
         if (!$itemSTMT->rowCount()) {
             $db->rollBack();
-            //echo 'item stmt failed';
-        } else {
+        //echo 'item stmt failed';
+        }
+        else {
             $auctionSTMT->execute();
             if (!$auctionSTMT->rowCount()) {
                 $db->rollBack();
-                //echo 'auction stmt failed';
-            } else {
+            //echo 'auction stmt failed';
+            }
+            else {
                 $db->commit();
                 //echo 'success db';
                 header('Location: listings.php');
@@ -109,10 +111,11 @@ include 'nav.php';
                 <select id="item-category" name="item-category" class="form-control" required>
                     <option selected disabled hidden>Please Select a Category</option>
                     <?php
-                    $sql = 'SELECT * FROM Category';
-                    foreach ($db->query($sql) as $row) { ?>
+$sql = 'SELECT * FROM Category';
+foreach ($db->query($sql) as $row) { ?>
                         <option value="<?php echo $row['category_id']; ?>"><?php echo $row['category']; ?></option>
-                    <?php } ?>
+                    <?php
+}?>
                 </select>
             </div>
         </div>
@@ -131,10 +134,11 @@ include 'nav.php';
                 <select id="item-state" name="item-state" class="form-control" required>
                     <option value="" selected disabled hidden>Please Select a Condition</option>
                     <?php
-                    $sql = 'SELECT * FROM State';
-                    foreach ($db->query($sql) as $row) { ?>
+$sql = 'SELECT * FROM State';
+foreach ($db->query($sql) as $row) { ?>
                         <option value="<?php echo $row['state_id']; ?>"><?php echo $row['state']; ?></option>
-                    <?php } ?>
+                    <?php
+}?>
                 </select>
             </div>
         </div>
@@ -156,9 +160,9 @@ include 'nav.php';
                     <span class="input-group-addon">$</span>
                     <input type="number" id="reserve-price" name="reserve-price" placeholder="Reserve Price" class="form-control" required>
                 </div>
-                <?php if (!empty($errPrice)){
-                    echo $errPrice;
-                } ?>
+                <?php if (!empty($errPrice)) {
+    echo $errPrice;
+}?>
             </div>
         </div>
         <!-- Auction Duration -->
@@ -168,10 +172,11 @@ include 'nav.php';
                 <select id="auction-duration" name="auction-duration" class="form-control" required>
                     <option value="" selected disabled hidden>Please Select the Auction Duration</option>
                     <?php
-                    $sql = 'SELECT * FROM Duration';
-                    foreach ($db->query($sql) as $row) { ?>
+$sql = 'SELECT * FROM Duration';
+foreach ($db->query($sql) as $row) { ?>
                         <option value="<?php echo $row['duration_id']; ?>"><?php echo $row['duration']; ?> Days </option>
-                    <?php } ?>
+                    <?php
+}?>
                 </select>
             </div>
         </div>
