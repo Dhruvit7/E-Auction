@@ -28,7 +28,7 @@ if(isset($_POST["username"],$_POST["password"],$_POST["confirm-password"],$_POST
 
 		if($resp->rowCount() == 0){
 			try{
-				$ins = $db->prepare('INSERT INTO Users VALUES (NULL,:username,:password,:profile_picture,:first_name,:last_name,:email,STR_TO_DATE(:dob,"%d/%m/%Y"),DEFAULT,DEFAULT,:role_id)');
+				$ins = $db->prepare('INSERT INTO Users VALUES (NULL,:username,:password,:profile_picture,:first_name,:last_name,:email,STR_TO_DATE(:dob,"%d/%m/%Y"),0,0,:role_id)');
 				
 				$hashedPass = sha1($_POST["password"],false);
 				//$dateofbirth =\DateTime::createFromFormat('m/d/Y', $_POST["dob"]) ;

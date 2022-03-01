@@ -16,7 +16,7 @@ session_start();
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="listings.php">eBuy Platform</a>
+            <a class="navbar-brand" href="listings.php">E-Auction</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
