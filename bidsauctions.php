@@ -20,11 +20,8 @@ if (isset($_POST['winConfirm'])) {
         //echo "Seller message sent!";
     }
 
-
     $mail->clearAddresses();
-
-
-
+    
     $mail->addAddress($_POST['buyerMail'], $_POST['username']);
 
     $mail->Subject = 'You have succesfully won an auction';
@@ -51,12 +48,10 @@ if (isset($_POST['winConfirm'])) {
 if (isset($_POST['stopAuction']) and is_numeric($_POST['stopAuction'])) {
     $now = new DateTime();
     $time = $now->format("Y-m-d H:i:s");
-    $id = $_POST['stopAuction'];
-//                                echo $time;
+    $id = $_POST['stopAuction'];    // echo $time;
     $updatesql = "UPDATE Auction
                                 SET end_time=:nowtime
-                                WHERE auction_id=:auctionID";
-//                                echo $updatesql;
+                                WHERE auction_id=:auctionID";    // echo $updatesql;
     $stmt = $db->prepare($updatesql);
     $stmt->bindParam(':nowtime', $time);
     $stmt->bindParam(':auctionID', $id);
@@ -122,8 +117,6 @@ include 'nav.php';
                         echo '<th class="text-center">Registered User : Current Price</th>';
                     }
                    
-
-                    ///////
                     if ($_SESSION['role_id'] == 2) {
                         echo '<th class="text-center">Your Reserve Price</th>';
                     } else if ($_SESSION['role_id'] == 1) {
@@ -140,7 +133,7 @@ include 'nav.php';
                     <th> Action</th>
                 </tr>
                 </thead>
-                <!--                The body of the table-->
+                <!-- The body of the table-->
                 <tbody>
                 <?php
                 $userid = $_SESSION['user_id'];
@@ -154,13 +147,6 @@ include 'nav.php';
                             INNER JOIN Users u ON u.user_id = a.user_id
                             INNER JOIN Item i ON a.item_id = i.item_id WHERE b.user_id = $userid
                             GROUP BY b.auction_id ORDER BY a.end_time DESC";
-                    
-                    // Seller
-                    //                    No information on bids
-                    //$sql_sell = "SELECT * FROM Auction a
-                    //        INNER JOIN Users u ON a.user_id = u.user_id
-                    //        INNER JOIN Item i ON a.item_id = i.item_id WHERE a.user_id = $userid
-                   //         ORDER BY a.end_time DESC";
                     
                 }
                 
@@ -182,10 +168,7 @@ include 'nav.php';
                             ORDER BY a.end_time DESC";
                 }
                 try {
-                   // $data_regUser = $db->query($sql_bid);
-                  //  $data_regUser .= $db->query($sql_sell);
-                  //  $data_regUser->setFetchMode(PDO::FETCH_ASSOC);
-                    
+                                    
                     $data = $db->query($sql);
                     $data->setFetchMode(PDO::FETCH_ASSOC);
                     
@@ -193,21 +176,17 @@ include 'nav.php';
                     echo 'ERROR: ' . $e->getMessage();
                 }
                 ?>
-                <?php while ($bidauction = $data->fetch()):  ?>
+                <?php while ($bidauction = $data->fetch()): ?>
                     <tr style="vertical-align">
                         <td class="col-sm-12 col-md-4">
                             <div class="media">
                                 <a class="thumbnail pull-left" href="#"> <img class="media-object"
-                                                                              src="<?php
-                                                                              echo $bidauction['item_picture'];
-                                                                              ?>"
+                                                                              src="<?php echo $bidauction['item_picture'];?>"
                                                                               style="width: 72px; height: 72px;"> </a>
                                 <div class="media-body">
                                     <h4 class="media-heading">
                                         <a href="productpage.php?auct=<?php echo $bidauction['auction_id']; ?>">
-                                            <?php
-                                            echo htmlspecialchars($bidauction['label']);
-                                            ?></a></h4>
+                                            <?php  echo htmlspecialchars($bidauction['label']);?></a></h4>
                                     <?php
                                     if ($_SESSION['role_id'] == 1)  {
                                         ?>
@@ -316,10 +295,14 @@ include 'nav.php';
                                         if ($enddt > time()) {
                                             echo 'Ongoing Auction';
                                         }
+                                        else if (is_null($result['win_confirmed']) == 0) {
+                                            echo 'Ongoing Auction';
+                                        }
 
-                                        if ($result['win_confirmed'] == 1) {
+                                        else if ($result['win_confirmed'] == 1 ) {
                                             echo 'Win Confirmed';
                                         }
+                                    
                                         if ($enddt <= time() && $result['win_confirmed'] == 0 && $bidauction['current_bid'] > $bidauction['reserve_price']) {
                                             echo 'Item Won but Unconfirmed';
                                         }
@@ -360,18 +343,24 @@ include 'nav.php';
                             <h5 class="media-heading"> Number of Bids: <?php
                                 $numsql = "SELECT count(b.bid_id) as bidcount FROM Bids b
                             WHERE auction_id=$auctionID GROUP BY auction_id ";
-                                try {
+                            
                                     $numdata = $db->query($numsql);
                                     $numdata->setFetchMode(PDO::FETCH_ASSOC);
                                     $numbids = $numdata->fetch();
-                                } catch (PDOException $e) {
-                                    echo 'ERROR: ' . $e->getMessage();
-                                }
+                                
+                                if($numbids){
+                                    if($numbids['bidcount']){
                                 echo htmlspecialchars($numbids['bidcount']);
+                                    }
+                                }
                                 ?></h5>
                             <h5 class="media-heading"> Highest Bidder: <a
                                     href="profile.php?user=<?php echo $result['user_id']; ?>"><?php
-                                    echo htmlspecialchars($result['username'])
+                                   if($result){
+                                   if($result['username']){
+                                    echo htmlspecialchars($result['username']);
+                                    }
+                                }
                                     ?></a></h5>
                             <h5 class="media-heading"> Viewings: <?php
                                 echo htmlspecialchars($bidauction['viewings'])
@@ -505,3 +494,4 @@ include 'nav.php';
 </script>
 </body>
 </html>
+

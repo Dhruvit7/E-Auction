@@ -1,13 +1,13 @@
 <?php
 //global $dsn, $db_user,$db_pass, $db;
-$dsn = 'mysql:host=localhost;dbname=ebay_clone';
+$dsn = 'mysql:host=localhost;dbname=e_auction';
 $db_user = 'root';
 $db_pass = '';
 
-try{
+try {
     $db = new PDO($dsn, $db_user, $db_pass);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
-catch (PDOException $e){
+catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
