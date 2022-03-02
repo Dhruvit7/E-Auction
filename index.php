@@ -20,15 +20,10 @@ require_once('dbConnection.php');
     <!-- Custom CSS -->
     <link href="css/loginregister.css" rel="stylesheet">
 
-<<<<<<< HEAD
-=======
-    <!-- jQuery -->
-    <!-- jQuery -->
->>>>>>> b8643ad59511e847dee1c6df201f640be4077dc0
     <script src="js/jquery.js"></script>
 
     <script src="js/loginregister.js"></script>
-    
+
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
@@ -40,21 +35,20 @@ require_once('dbConnection.php');
 
     <div class="container">
         <div class="row">
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="container-fluid">
 
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">e-Auction</a>
-        </div>
-    </nav>
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">e-Auction</a>
+                    </div>
+            </nav>
             <div class="col-md-6 col-md-offset-3">
                 <div class="panel panel-login">
                     <div class="panel-heading">
@@ -109,12 +103,12 @@ require_once('dbConnection.php');
                                         <label for="filter">Role</label>
                                         <select class="form-control" id="role" name="role">
                                             <?php $sql = 'SELECT * FROM Roles';
-foreach ($db->query($sql) as $row) { ?>
+                                            foreach ($db->query($sql) as $row) { ?>
                                                 <option value="<?php echo $row['role_id']; ?>">
                                                     <?php echo htmlspecialchars($row['role']); ?>
                                                 </option>
-                                                <?php
-}?>
+                                            <?php
+                                            } ?>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -140,30 +134,27 @@ foreach ($db->query($sql) as $row) { ?>
     </div>
 
     <div id="errorlog" style="visibility:hidden"></div>
-    
+
     <?php
-if (isset($_GET['val'])) {
-    if ($_GET['val'] == "success") {
-        echo "<script>
+    if (isset($_GET['val'])) {
+        if ($_GET['val'] == "success") {
+            echo "<script>
                         $(function() {
                             $('#errorlog').text('Registration Successful!').css('background-color','#1CA347').css('visibility','visible');
                             $('#errorlog').delay(2000).fadeOut('slow');
                         });
                      </script>";
-    }
-    else {
-        $errString;
-        if ($_GET['val'] == 1) {
-            $errString = 'Passwords do not match!';
-        }
-        else if ($_GET['val'] == 2) {
-            $errString = 'Missing inputs!';
-        }
-        else {
-            $errString = 'Username or email already exists!';
-        }
+        } else {
+            $errString;
+            if ($_GET['val'] == 1) {
+                $errString = 'Passwords do not match!';
+            } else if ($_GET['val'] == 2) {
+                $errString = 'Missing inputs!';
+            } else {
+                $errString = 'Username or email already exists!';
+            }
 
-        echo "<script>
+            echo "<script>
                         $(function() {
                             $('#errorlog').text('" . $errString . "').css('background-color','#FF072D').css('visibility','visible');
                             $('#errorlog').delay(2000).fadeOut('slow');
@@ -173,13 +164,13 @@ if (isset($_GET['val'])) {
                             $('#register-form-link').addClass('active');
                         });
                      </script>";
+        }
     }
-}
 
 
 
 
-?>
+    ?>
 </body>
 
 </html>

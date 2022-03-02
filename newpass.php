@@ -3,6 +3,7 @@ require_once('dbConnection.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,13 +13,14 @@ require_once('dbConnection.php');
     <link href="css/resetpwd.css" rel="stylesheet">
     <script src="js/bootstrap.min.js"></script>
 </head>
+
 <body>
     <div class="container">
         <div class="row">
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="container-fluid">
 
-            <!-- Brand and toggle get grouped for better mobile display -->
+                    <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
                         <a class="navbar-brand" href="#">e-Auction</a>
                     </div>
@@ -48,12 +50,13 @@ require_once('dbConnection.php');
                                         </div>
                                     </div>
                                 </form>
-                            </div>  
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
 </body>
+
 </html>

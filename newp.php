@@ -15,5 +15,3 @@ require("dbConnection.php");
             header("Location: index.php");
         }
     }
-
-?>

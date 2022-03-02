@@ -32,4 +32,3 @@ if(isset($_POST["username"],$_POST["password"])){
     echo "Invalid";
     header("Location: index.php");
 }
-?>
