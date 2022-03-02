@@ -1,184 +1,190 @@
-<?php
-include 'nav.php';
-//If search has been submitted
-if (isset($_GET['sort'])) {
-    $name = $_GET['search-name'];
-    $category = $_GET['search-category'];
-    $state = $_GET['search-state'];
-    $sort = $_GET['sort'];
-    //If category is set to a category
-    if ($category != 0) {
-        //If state is set to a state
-        if ($state != 0) {
-            if ($sort == 1) {
-                $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
-                        FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
-                        AND I.category_id = :category AND A.item_id = I.item_id AND I.state_id = :state AND I.state_id = S.state_id
-                        ORDER BY A.end_time ASC';
-                $stmt = $db->prepare($sql);
-                $stmt->bindValue(':search', '%' . $name . '%');
-                $stmt->bindParam(':category', $category);
-                $stmt->bindParam(':state', $state);
-            } else if ($sort == 2) {
-                $sql = 'SELECT A.current_bid, A.end_time, A.viewings,A.auction_id, I.item_picture, I.label, I.description, S.state
-                        FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
-                        AND I.category_id = :category AND A.item_id = I.item_id AND I.state_id = :state AND I.state_id = S.state_id
-                        ORDER BY A.end_time DESC';
-                $stmt = $db->prepare($sql);
-                $stmt->bindValue(':search', '%' . $name . '%');
-                $stmt->bindParam(':category', $category);
-                $stmt->bindParam(':state', $state);
-            } else if ($sort == 3) {
-                $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
-                        FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
-                        AND I.category_id = :category AND A.item_id = I.item_id AND I.state_id = :state AND I.state_id = S.state_id
-                        ORDER BY A.current_bid ASC';
-                $stmt = $db->prepare($sql);
-                $stmt->bindValue(':search', '%' . $name . '%');
-                $stmt->bindParam(':category', $category);
-                $stmt->bindParam(':state', $state);
-            } else if ($sort == 4) {
-                $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
-                        FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
-                        AND I.category_id = :category AND A.item_id = I.item_id AND I.state_id = :state AND I.state_id = S.state_id
-                        ORDER BY A.current_bid DESC';
-                $stmt = $db->prepare($sql);
-                $stmt->bindValue(':search', '%' . $name . '%');
-                $stmt->bindParam(':category', $category);
-                $stmt->bindParam(':state', $state);
-            }
-        }
-        //If state is set to all states
-        else {
-            if ($sort == 1) {
-                $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
-                            FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
-                            AND I.category_id = :category AND A.item_id = I.item_id AND I.state_id = S.state_id
-                            ORDER BY A.end_time ASC';
-                $stmt = $db->prepare($sql);
-                $stmt->bindValue(':search', '%' . $name . '%');
-                $stmt->bindParam(':category', $category);
-            } else if ($sort == 2) {
-                $sql = 'SELECT A.current_bid, A.end_time, A.viewings,A.auction_id, I.item_picture, I.label, I.description, S.state
-                        FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
-                        AND I.category_id = :category AND A.item_id = I.item_id AND I.state_id = S.state_id
-                        ORDER BY A.end_time DESC';
-                $stmt = $db->prepare($sql);
-                $stmt->bindValue(':search', '%' . $name . '%');
-                $stmt->bindParam(':category', $category);
-            } else if ($sort == 3) {
-                $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
-                        FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
-                        AND I.category_id = :category AND A.item_id = I.item_id AND I.state_id = S.state_id
-                        ORDER BY A.current_bid ASC';
-                $stmt = $db->prepare($sql);
-                $stmt->bindValue(':search', '%' . $name . '%');
-                $stmt->bindParam(':category', $category);
-            } else if ($sort == 4) {
-                $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
-                        FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
-                        AND I.category_id = :category AND A.item_id = I.item_id AND I.state_id = S.state_id
-                        ORDER BY A.current_bid DESC';
-                $stmt = $db->prepare($sql);
-                $stmt->bindValue(':search', '%' . $name . '%');
-                $stmt->bindParam(':category', $category);
-            }
-        }
-    }
-    //If category is set to all categories
-    else if ($category == 0) {
-        //If state is set to a state
-        if ($state != 0) {
-            if ($sort == 1) {
-                $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
-                        FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
-                        AND A.item_id = I.item_id AND I.state_id = :state AND I.state_id = S.state_id ORDER BY A.end_time ASC';
-                $stmt = $db->prepare($sql);
-                $stmt->bindValue(':search', '%' . $name . '%');
-                $stmt->bindParam(':state', $state);
-            } else if ($sort == 2) {
-                $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
-                        FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
-                        AND A.item_id = I.item_id AND I.state_id = :state AND I.state_id = S.state_id ORDER BY A.end_time DESC';
-                $stmt = $db->prepare($sql);
-                $stmt->bindValue(':search', '%' . $name . '%');
-                $stmt->bindParam(':state', $state);
-            } else if ($sort == 3) {
-                $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
-                        FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
-                        AND A.item_id = I.item_id AND I.state_id = :state AND I.state_id = S.state_id ORDER BY A.current_bid ASC';
-                $stmt = $db->prepare($sql);
-                $stmt->bindValue(':search', '%' . $name . '%');
-                $stmt->bindParam(':state', $state);
-            } else if ($sort == 4) {
-                $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
-                        FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
-                        AND A.item_id = I.item_id AND I.state_id = :state AND I.state_id = S.state_id ORDER BY A.current_bid DESC';
-                $stmt = $db->prepare($sql);
-                $stmt->bindValue(':search', '%' . $name . '%');
-                $stmt->bindParam(':state', $state);
-            }
-        }
-        //If state is set to all states
-        else {
-            if ($sort == 1) {
-                $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
-                        FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
-                        AND A.item_id = I.item_id AND I.state_id = S.state_id ORDER BY A.end_time ASC';
-                $stmt = $db->prepare($sql);
-                $stmt->bindValue(':search', '%' . $name . '%');
-            } else if ($sort == 2) {
-                $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
-                        FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
-                        AND A.item_id = I.item_id AND I.state_id = S.state_id ORDER BY A.end_time DESC';
-                $stmt = $db->prepare($sql);
-                $stmt->bindValue(':search', '%' . $name . '%');
-            } else if ($sort == 3) {
-                $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
-                        FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
-                        AND A.item_id = I.item_id AND I.state_id = S.state_id ORDER BY A.current_bid ASC';
-                $stmt = $db->prepare($sql);
-                $stmt->bindValue(':search', '%' . $name . '%');
-            } else if ($sort == 4) {
-                $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
-                        FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
-                        AND A.item_id = I.item_id AND I.state_id = S.state_id ORDER BY A.current_bid DESC';
-                $stmt = $db->prepare($sql);
-                $stmt->bindValue(':search', '%' . $name . '%');
-            }
-        }
-    }
-    $stmt->execute();
-    $result = $stmt->fetchAll();
-    $currentLink = 'listings.php?search-name=' . $name . '&search-category=' . $category . '&search-state=' . $state;
-}
-//If search has not been submitted
-else {
-    $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
-            FROM Auction A, Item I, State S WHERE A.item_id = I.item_id AND I.state_id = S.state_id ORDER BY A.end_time ASC';
-    $stmt = $db->prepare($sql);
-    $stmt->execute();
-    $result = $stmt->fetchAll();
-    $currentLink = 'listings.php?search-name=&search-category=0&search-state=0';
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+   
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>E-Auction - Bid your Product</title>
+    <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/shop-homepage.css" rel="stylesheet">
 
-    <!-- Bootstrap Core JavaScript -->
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
 </head>
 
 <body>
-
+    <?php
+    include 'nav.php';
+        //If search has been submitted
+    if (isset($_GET['sort'])) {
+        $name = $_GET['search-name'];
+        $category = $_GET['search-category'];
+        $state = $_GET['search-state'];
+        $sort = $_GET['sort'];
+        //If category is set to a category
+        if ($category != 0) {
+            //If state is set to a state
+            if ($state != 0) {
+                if ($sort == 1) {
+                    $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
+                            FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
+                            AND I.category_id = :category AND A.item_id = I.item_id AND I.state_id = :state AND I.state_id = S.state_id
+                            ORDER BY A.end_time ASC';
+                    $stmt = $db->prepare($sql);
+                    $stmt->bindValue(':search', '%' . $name . '%');
+                    $stmt->bindParam(':category', $category);
+                    $stmt->bindParam(':state', $state);
+                } else if ($sort == 2) {
+                    $sql = 'SELECT A.current_bid, A.end_time, A.viewings,A.auction_id, I.item_picture, I.label, I.description, S.state
+                            FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
+                            AND I.category_id = :category AND A.item_id = I.item_id AND I.state_id = :state AND I.state_id = S.state_id
+                            ORDER BY A.end_time DESC';
+                    $stmt = $db->prepare($sql);
+                    $stmt->bindValue(':search', '%' . $name . '%');
+                    $stmt->bindParam(':category', $category);
+                    $stmt->bindParam(':state', $state);
+                } else if ($sort == 3) {
+                    $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
+                            FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
+                            AND I.category_id = :category AND A.item_id = I.item_id AND I.state_id = :state AND I.state_id = S.state_id
+                            ORDER BY A.current_bid ASC';
+                    $stmt = $db->prepare($sql);
+                    $stmt->bindValue(':search', '%' . $name . '%');
+                    $stmt->bindParam(':category', $category);
+                    $stmt->bindParam(':state', $state);
+                } else if ($sort == 4) {
+                    $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
+                            FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
+                            AND I.category_id = :category AND A.item_id = I.item_id AND I.state_id = :state AND I.state_id = S.state_id
+                            ORDER BY A.current_bid DESC';
+                    $stmt = $db->prepare($sql);
+                    $stmt->bindValue(':search', '%' . $name . '%');
+                    $stmt->bindParam(':category', $category);
+                    $stmt->bindParam(':state', $state);
+                }
+            }
+            //If state is set to all states
+            else {
+                if ($sort == 1) {
+                    $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
+                                FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
+                                AND I.category_id = :category AND A.item_id = I.item_id AND I.state_id = S.state_id
+                                ORDER BY A.end_time ASC';
+                    $stmt = $db->prepare($sql);
+                    $stmt->bindValue(':search', '%' . $name . '%');
+                    $stmt->bindParam(':category', $category);
+                } else if ($sort == 2) {
+                    $sql = 'SELECT A.current_bid, A.end_time, A.viewings,A.auction_id, I.item_picture, I.label, I.description, S.state
+                            FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
+                            AND I.category_id = :category AND A.item_id = I.item_id AND I.state_id = S.state_id
+                            ORDER BY A.end_time DESC';
+                    $stmt = $db->prepare($sql);
+                    $stmt->bindValue(':search', '%' . $name . '%');
+                    $stmt->bindParam(':category', $category);
+                } else if ($sort == 3) {
+                    $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
+                            FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
+                            AND I.category_id = :category AND A.item_id = I.item_id AND I.state_id = S.state_id
+                            ORDER BY A.current_bid ASC';
+                    $stmt = $db->prepare($sql);
+                    $stmt->bindValue(':search', '%' . $name . '%');
+                    $stmt->bindParam(':category', $category);
+                } else if ($sort == 4) {
+                    $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
+                            FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
+                            AND I.category_id = :category AND A.item_id = I.item_id AND I.state_id = S.state_id
+                            ORDER BY A.current_bid DESC';
+                    $stmt = $db->prepare($sql);
+                    $stmt->bindValue(':search', '%' . $name . '%');
+                    $stmt->bindParam(':category', $category);
+                }
+            }
+        }
+        //If category is set to all categories
+        else if ($category == 0) {
+            //If state is set to a state
+            if ($state != 0) {
+                if ($sort == 1) {
+                    $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
+                            FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
+                            AND A.item_id = I.item_id AND I.state_id = :state AND I.state_id = S.state_id ORDER BY A.end_time ASC';
+                    $stmt = $db->prepare($sql);
+                    $stmt->bindValue(':search', '%' . $name . '%');
+                    $stmt->bindParam(':state', $state);
+                } else if ($sort == 2) {
+                    $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
+                            FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
+                            AND A.item_id = I.item_id AND I.state_id = :state AND I.state_id = S.state_id ORDER BY A.end_time DESC';
+                    $stmt = $db->prepare($sql);
+                    $stmt->bindValue(':search', '%' . $name . '%');
+                    $stmt->bindParam(':state', $state);
+                } else if ($sort == 3) {
+                    $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
+                            FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
+                            AND A.item_id = I.item_id AND I.state_id = :state AND I.state_id = S.state_id ORDER BY A.current_bid ASC';
+                    $stmt = $db->prepare($sql);
+                    $stmt->bindValue(':search', '%' . $name . '%');
+                    $stmt->bindParam(':state', $state);
+                } else if ($sort == 4) {
+                    $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
+                            FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
+                            AND A.item_id = I.item_id AND I.state_id = :state AND I.state_id = S.state_id ORDER BY A.current_bid DESC';
+                    $stmt = $db->prepare($sql);
+                    $stmt->bindValue(':search', '%' . $name . '%');
+                    $stmt->bindParam(':state', $state);
+                }
+            }
+            //If state is set to all states
+            else {
+                if ($sort == 1) {
+                    $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
+                            FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
+                            AND A.item_id = I.item_id AND I.state_id = S.state_id ORDER BY A.end_time ASC';
+                    $stmt = $db->prepare($sql);
+                    $stmt->bindValue(':search', '%' . $name . '%');
+                } else if ($sort == 2) {
+                    $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
+                            FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
+                            AND A.item_id = I.item_id AND I.state_id = S.state_id ORDER BY A.end_time DESC';
+                    $stmt = $db->prepare($sql);
+                    $stmt->bindValue(':search', '%' . $name . '%');
+                } else if ($sort == 3) {
+                    $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
+                            FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
+                            AND A.item_id = I.item_id AND I.state_id = S.state_id ORDER BY A.current_bid ASC';
+                    $stmt = $db->prepare($sql);
+                    $stmt->bindValue(':search', '%' . $name . '%');
+                } else if ($sort == 4) {
+                    $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
+                            FROM Auction A, Item I, State S WHERE (I.label LIKE :search OR I.description LIKE :search)
+                            AND A.item_id = I.item_id AND I.state_id = S.state_id ORDER BY A.current_bid DESC';
+                    $stmt = $db->prepare($sql);
+                    $stmt->bindValue(':search', '%' . $name . '%');
+                }
+            }
+        }
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $currentLink = 'listings.php?search-name=' . $name . '&search-category=' . $category . '&search-state=' . $state;
+    }
+    //If search has not been submitted
+    else {
+        $sql = 'SELECT A.current_bid, A.end_time, A.viewings, A.auction_id, I.item_picture, I.label, I.description, S.state
+                FROM Auction A, Item I, State S WHERE A.item_id = I.item_id AND I.state_id = S.state_id ORDER BY A.end_time ASC';
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $currentLink = 'listings.php?search-name=&search-category=0&search-state=0';
+    }
+    ?>
     <div class="col-md-6 col-md-offset-3 text-center">
         <div class="btn-group btn-group-justified" role="group">
             <a href="<?php echo $currentLink . '&sort=1' ?>" class="btn btn-primary" role="button">Lowest Time Remain</a>
@@ -219,3 +225,4 @@ else {
 </body>
 
 </html>
+        
