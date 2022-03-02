@@ -36,6 +36,28 @@ if (isset($_POST["username"], $_POST["password"], $_POST["confirm-password"], $_
 				$ins->bindParam(':last_name', htmlspecialchars($_POST["lastname"]));
 				$ins->bindParam(':dob', htmlspecialchars($_POST["dob"]));
 				$ins->bindParam(':role_id', $_POST["role"]);
+		//Other validations
+
+
+		if($resp->rowCount() == 0){
+			try{
+				$ins = $db->prepare('INSERT INTO Users VALUES (NULL,:username,:password,:profile_picture,:first_name,:last_name,:email,STR_TO_DATE(:dob,"%d/%m/%Y"),0,0,:role_id)');
+				
+				$hashedPass = sha1($_POST["password"],false);
+				//$dateofbirth =\DateTime::createFromFormat('m/d/Y', $_POST["dob"]) ;
+				//$date = $dateofbirth->format('Y-m-d');
+				//$timestamp = $date->getTimestamp();
+
+				$ins->bindParam(':username',htmlspecialchars($_POST["username"]));
+                $ins->bindParam(':email',htmlspecialchars($_POST["email"]));
+
+				$ins->bindParam(':profile_picture',htmlspecialchars("uploads/profile/stock.jpg"));
+				$ins->bindParam(':password',$hashedPass);
+				$ins->bindParam(':first_name',htmlspecialchars($_POST["firstname"]));
+				$ins->bindParam(':last_name',htmlspecialchars($_POST["lastname"]));
+				$ins->bindParam(':dob',htmlspecialchars($_POST["dob"]));
+                $ins->bindParam(':role_id',$_POST["role"]);
+
 				$ins->execute();
 				header('Location: index.php?val=success');
 
@@ -52,3 +74,5 @@ if (isset($_POST["username"], $_POST["password"], $_POST["confirm-password"], $_
 else {
 	header('Location: index.php?val=2');
 }
+	
+?>}
