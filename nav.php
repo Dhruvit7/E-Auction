@@ -9,8 +9,7 @@ session_start();
 
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -23,28 +22,25 @@ session_start();
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="profile.php"><?php echo $_SESSION['first_name']?></a>
+                    <a href="#"><?php echo $_SESSION['first_name'] ?></a>
                 </li>
                 <li>
                     <?php
                     if ($_SESSION['role_id'] == 2) {
                         echo '<a href="bidsauctions.php">Your Auctions</a>';
-                    }
-                    else if ($_SESSION['role_id'] == 1) {
+                    } else if ($_SESSION['role_id'] == 1) {
                         echo '<a href="bidsauctions.php">Your Bids</a>';
-                    }
-                    else if ($_SESSION['role_id'] == 4) {
+                    } else if ($_SESSION['role_id'] == 4) {
                         echo '<a href="bidsauctions.php">Your Bids</a>';
-                        
                     }
                     ?>
                 </li>
                 <li>
-                	<?php
-                		if ($_SESSION['role_id'] == 4) {
+                    <?php
+                    if ($_SESSION['role_id'] == 4) {
                         echo '<a href="bidsauctions2.php">Your auctions</a>';
-                		}
-                 ?> 
+                    }
+                    ?>
                 </li>
                 <li>
                     <?php
@@ -70,11 +66,11 @@ session_start();
                 <div class="form-group">
                     <label class="sr-only" for="item-category">Product Category</label>
                     <select id="item-category" name="search-category" class="form-control">
-                        <option value = "0" selected>All Categories</option>
+                        <option value="0" selected>All Categories</option>
                         <?php
                         $sql = 'SELECT * FROM Category';
-                        foreach ($db -> query($sql) as $row) { ?>
-                            <option value = "<?php echo $row['category_id']; ?>"><?php echo $row['category']; ?></option>
+                        foreach ($db->query($sql) as $row) { ?>
+                            <option value="<?php echo $row['category_id']; ?>"><?php echo $row['category']; ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -82,7 +78,7 @@ session_start();
                 <div class="form-group">
                     <label class="sr-only" for="item-state">Product Condition</label>
                     <select id="item-state" name="search-state" class="form-control">
-                        <option value = "0" selected>All Conditions</option>
+                        <option value="0" selected>All Conditions</option>
                         <?php
                         $sql = 'SELECT * FROM State';
                         foreach ($db->query($sql) as $row) { ?>

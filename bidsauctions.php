@@ -191,7 +191,7 @@ include 'nav.php';
                                     if ($_SESSION['role_id'] == 1)  {
                                         ?>
                                         <h5 class="media-heading"> Sold By: <a
-                                                href="profile.php?user=<?php echo $bidauction['sellerID']; ?>"><?php
+                                                href="#?user=<?php echo $bidauction['sellerID']; ?>"><?php
                                                 echo htmlspecialchars($bidauction['username'])
                                                 ?></a></h5>
                                         <?php
@@ -199,7 +199,7 @@ include 'nav.php';
                                     else if ($_SESSION['role_id'] == 4)  {
                                         ?>
                                         <h5 class="media-heading"> Sold By: <a
-                                                href="profile.php?user=<?php echo $bidauction['sellerID']; ?>"><?php
+                                                href="#?user=<?php echo $bidauction['sellerID']; ?>"><?php
                                                 echo htmlspecialchars($bidauction['username'])
                                                 ?></a></h5>
                                         <?php
@@ -360,7 +360,7 @@ include 'nav.php';
                                 }
                                 ?></h5>
                             <h5 class="media-heading"> Highest Bidder: <a
-                                    href="profile.php?user=<?php echo $result['user_id']; ?>"><?php
+                                    href="#?user=<?php echo $result['user_id']; ?>"><?php
                                    if($result){
                                    if($result['username']){
                                     echo htmlspecialchars($result['username']);
