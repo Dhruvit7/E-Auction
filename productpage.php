@@ -248,13 +248,7 @@ if (isset($_GET["auct"])) {
                                 </div>
                             </div>
                     </div>
-                    <!--
-                <div class="btn-group wishlist">
-                    <button type="button" class="btn btn-danger">
-                        Add to wishlist
-                    </button>
-                </div>
--->
+             
                 </div>
             </div>
         </div>

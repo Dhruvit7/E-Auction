@@ -293,13 +293,16 @@ include 'nav.php';
                                     else if ($_SESSION['role_id'] == 2) {
                                         echo '<span>Status: </span><span class="text-success"><strong>';
                                         if ($enddt > time()) {
-                                            echo 'Ongoing Auction';
-                                        }
-                                        if($result){
-                                            if ($result['win_confirmed'] == 0) {
+                                            if($result){
+                                                if ($result['win_confirmed'] == 0) {
+                                                    echo 'Ongoing Auction';
+                                                }
+                                            }
+                                            else{
                                                 echo 'Ongoing Auction';
                                             }
                                         }
+                                        
                                         
                                         if($result){
                                             if ($result['win_confirmed'] == 1) {
