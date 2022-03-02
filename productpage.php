@@ -44,8 +44,7 @@ if (isset($_POST['submit'])) {
             $watchSTMT = $db->prepare($watchSQL);
             $watchSTMT->bindParam(':previousUser', $previousUser['user_id']);
             $watchSTMT->bindParam(':auctionID', $auctionID);
-            $watchSTMT->execute();
-
+           
             if ($watchSTMT->fetch()) {
 
                 include_once 'mailer.php';
@@ -221,9 +220,7 @@ if (isset($_GET["auct"])) {
                                     $watchSTMT = $db->prepare($watchSQL);
                                     $watchSTMT->bindParam(':userID', $_SESSION['user_id']);
                                     $watchSTMT->bindParam(':auctionID', $data['auction_id']);
-                                    $watchSTMT->execute();
-
-                                    if ($watchSTMT->fetch()) {
+                                                                       if ($watchSTMT->fetch()) {
                                         $buttonName = 'Watching Item';
                                     } else {
                                         $buttonName = 'Watch Item';
