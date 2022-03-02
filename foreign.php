@@ -48,19 +48,20 @@ if (!empty($data)) {
                                     <td>Rating</td>
                                     <td>
                                         <?php
-                                        $stars = round($data['rating'], 0, PHP_ROUND_HALF_DOWN);
-                                        $diff = $data['rating'] - $stars;
-                                        $perc = number_format(($data['rating'] / 5) * 100);
-                                        do {
-                                            if ($stars == 1 && $diff < 0) {
-                                                echo '<span class="glyphicon glyphicon-star opacity"></span>';
-                                            } else {
-                                                echo '<span class="glyphicon glyphicon-star"></span>';
-                                            }
-                                            $stars = $stars - 1;
-                                        } while ($stars > 0);
-                                        echo "<p>  " . $perc . "% </p>";
-                                        ?>
+    $stars = round($data['rating'], 0, PHP_ROUND_HALF_DOWN);
+    $diff = $data['rating'] - $stars;
+    $perc = number_format(($data['rating'] / 5) * 100);
+    do {
+        if ($stars == 1 && $diff < 0) {
+            echo '<span class="glyphicon glyphicon-star opacity"></span>';
+        }
+        else {
+            echo '<span class="glyphicon glyphicon-star"></span>';
+        }
+        $stars = $stars - 1;
+    } while ($stars > 0);
+    echo "<p>  " . $perc . "% </p>";
+?>
 
                                     </td>
 
@@ -76,8 +77,8 @@ if (!empty($data)) {
         </div>
 
     <?php
-    } else {
-        ?>
+} else {
+?>
         <div class="container" style="padding-top:100px">
             <div class="row">
                 <div
@@ -108,7 +109,7 @@ if (!empty($data)) {
         </div>
 
         <?php
-    }
+}
     ?>
 
     <?php
