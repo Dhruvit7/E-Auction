@@ -12,7 +12,7 @@ require_once('dbConnection.php');
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Shop Homepage - Start Bootstrap Template</title>
+    <title>E-Auction - Bid your Product</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -20,6 +20,11 @@ require_once('dbConnection.php');
     <!-- Custom CSS -->
     <link href="css/loginregister.css" rel="stylesheet">
 
+<<<<<<< HEAD
+=======
+    <!-- jQuery -->
+    <!-- jQuery -->
+>>>>>>> b8643ad59511e847dee1c6df201f640be4077dc0
     <script src="js/jquery.js"></script>
 
     <script src="js/loginregister.js"></script>
@@ -176,9 +181,5 @@ if (isset($_GET['val'])) {
 
 ?>
 </body>
-
-
-
-
 
 </html>

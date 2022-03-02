@@ -295,17 +295,22 @@ include 'nav.php';
                                         if ($enddt > time()) {
                                             echo 'Ongoing Auction';
                                         }
-                                        else if (is_null($result['win_confirmed']) == 0) {
-                                            echo 'Ongoing Auction';
+                                        if($result){
+                                            if ($result['win_confirmed'] == 0) {
+                                                echo 'Ongoing Auction';
+                                            }
                                         }
-
-                                        else if ($result['win_confirmed'] == 1 ) {
-                                            echo 'Win Confirmed';
+                                        
+                                        if($result){
+                                            if ($result['win_confirmed'] == 1) {
+                                                echo 'Win Confirmed';
+                                            }
                                         }
-                                    
+                                    if($result && $bidauction){
                                         if ($enddt <= time() && $result['win_confirmed'] == 0 && $bidauction['current_bid'] > $bidauction['reserve_price']) {
                                             echo 'Item Won but Unconfirmed';
                                         }
+                                    }
                                         if ($enddt <= time() && ($bidauction['current_bid'] < $bidauction['reserve_price'])) {
                                             echo 'Didn\'t meet reserve';
                                         }
