@@ -31,8 +31,7 @@ if (isset($_POST["username"], $_POST["password"], $_POST["confirm-password"], $_
 		
 		if ($resp->rowCount() == 0) 
 		{
-			try 
-			{
+			
 				$ins = $db->prepare('INSERT INTO Users VALUES (NULL,:username,:password,:profile_picture,:first_name,:last_name,:email,STR_TO_DATE(:dob,"%d/%m/%Y"),DEFAULT,DEFAULT,:role_id)');
 				$hashedPass = sha1($_POST["password"], false);
 				$ins->bindParam(':username', htmlspecialchars($_POST["username"]));
@@ -81,7 +80,7 @@ if (isset($_POST["username"], $_POST["password"], $_POST["confirm-password"], $_
 					header('Location: index.php?val=3');
 				}
 			}
-		}
+		
 	}
 }
 else{
