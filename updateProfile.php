@@ -22,8 +22,7 @@ try {
     }
     if (!empty($_POST["dob"])) {
         $dob = $_POST["dob"];
-    }
-//    Check if the image has been changed from the past
+    }    //    Check if the image has been changed from the past
     $image_name = $_FILES['userfile']['name'];
     $tmp_name = $_FILES['userfile']['tmp_name'];
     $saveddate = date('mdy-Hms');
@@ -64,8 +63,7 @@ try {
 
     if (count($updates) > 0) {
         $sql .= implode(', ', $updates) . " WHERE user_id='$userID'";
-    }
-//    Prepare query
+    }    //    Prepare query
     $updatequery = $db->prepare($sql);
 
     // execute the query
@@ -73,6 +71,7 @@ try {
 
     header('Location: profile.php');
 
-} catch (PDOException $e) {
+}
+catch (PDOException $e) {
     echo $e->getMessage();
 }

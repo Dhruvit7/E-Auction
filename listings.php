@@ -187,8 +187,8 @@ else {
 
     <div class="col-md-6 col-md-offset-3 text-center">
         <div class="btn-group btn-group-justified" role="group">
-            <a href="<?php echo $currentLink.'&sort=1'?>" class="btn btn-primary" role="button">Lowest Time Remaining</a>
-            <a href="<?php echo $currentLink.'&sort=2'?>" class="btn btn-primary" role="button">Highest Time Remaining</a>
+            <a href="<?php echo $currentLink.'&sort=1'?>" class="btn btn-primary" role="button">Lowest Time Remain</a>
+            <a href="<?php echo $currentLink.'&sort=2'?>" class="btn btn-primary" role="button">Highest Time Remain</a>
             <a href="<?php echo $currentLink.'&sort=3'?>" class="btn btn-primary" role="button">Lowest Bid</a>
             <a href="<?php echo $currentLink.'&sort=4'?>" class="btn btn-primary" role="button">Highest Bid</a>
         </div>

@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
         $response->execute();
 
         //Get previous bidder id
-        $previousSQL = 'SELECT user_id, bid_price FROM ebay_clone.Bids WHERE auction_id = :auctionID ORDER BY bid_price DESC LIMIT 1, 1';
+        $previousSQL = 'SELECT user_id, bid_price FROM e_auction.Bids WHERE auction_id = :auctionID ORDER BY bid_price DESC LIMIT 1, 1';
         $previousSTMT = $db->prepare($previousSQL);
         $previousSTMT->bindParam(':auctionID', $auctionID);
         $previousSTMT->execute();
