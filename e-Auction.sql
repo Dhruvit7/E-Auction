@@ -3,7 +3,7 @@
 
 -- Delete previous copies of DB
 DROP DATABASE IF EXISTS scotchbox;
-DROP DATABASE IF EXISTS ebay_clone;
+DROP DATABASE IF EXISTS e-auction;
 
 -- Create new DB
 CREATE DATABASE ebay_clone
