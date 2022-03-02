@@ -13,7 +13,7 @@ require_once('dbConnection.php');
     <meta name="author" content="">
 
     <title>E-Auction - Bid your Product</title>
-    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">

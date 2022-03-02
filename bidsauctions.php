@@ -72,7 +72,7 @@ if (isset($_POST['stopAuction']) and is_numeric($_POST['stopAuction'])) {
     <meta name="author" content="">
 
     <title>Shop Homepage - Start Bootstrap Template</title>
-
+    <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
