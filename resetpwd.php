@@ -39,7 +39,11 @@ require_once('dbConnection.php');
                             <div class="col-lg-12">
                                 <form id="login-form" action="reset.php" method="post" role="form" style="display: block;">
                                     <div class="form-group">
+<<<<<<< HEAD
                                         <input type="text" name="username1" id="username1" tabindex="1" class="form-control" placeholder="Enter Username" value="">
+=======
+                                        <input type="text" name="username1" id="username1" tabindex="1" class="form-control" placeholder="Enter User name" value="">
+>>>>>>> 1caeeba923f8369a3b72665ad07102a60b00d049
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
