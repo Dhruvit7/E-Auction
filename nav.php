@@ -36,11 +36,7 @@ session_start();
                     ?>
                 </li>
                 <li>
-                    <?php
-                    if ($_SESSION['role_id'] == 4) {
-                        echo '<a href="bidsauctions2.php">Your auctions</a>';
-                    }
-                    ?>
+                    
                 </li>
                 <li>
                     <?php
