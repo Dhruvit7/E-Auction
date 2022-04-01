@@ -22,7 +22,7 @@ session_start();
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#"><?php echo $_SESSION['first_name'] ?></a>
+                    <a href="profile.php"><?php echo $_SESSION['first_name'] ?></a>
                 </li>
                 <li>
                     <?php
