@@ -177,7 +177,7 @@ include 'nav.php';
                 }
                 ?>
                 <?php while ($bidauction = $data->fetch()): ?>
-                    <tr style="vertical-align">
+                    <tr style="vertical-align:middle">
                         <td class="col-sm-12 col-md-4">
                             <div class="media">
                                 <a class="thumbnail pull-left" href="#"> <img class="media-object"
@@ -417,6 +417,13 @@ include 'nav.php';
                                         Stop Auction
                                     </button>
                                 </form>
+                                <br>
+                                <?php
+                                $id = $bidauction['auction_id'];
+                                echo '<a href="editauction.php?auct=' . $id . '" class="btn btn-info" style="margin-top:10px">
+                               Edit Auction
+                                </a>';
+                                ?>
                                 <?php
                             }
                             if ($_SESSION['role_id'] == 2 && $enddt <= time()) {
